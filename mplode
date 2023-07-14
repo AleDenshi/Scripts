@@ -1,0 +1,20 @@
+#!/bin/sh
+# Script for generating YouTube-esque music videos from file metadata.
+[ -z "$1" ] && printf "Usage: mplode [infile]\n" && exit 0
+# Global FFMPEG options
+OPT=" -hide_banner -loglevel error -stats"
+for i in "$@"; do
+ffmpeg $OPT -i "$i" -an cover.png
+ffmpeg $OPT -i cover.png -s 1x1 color.png
+ffmpeg $OPT -i color.png -s 1920x1080 background.png
+rm -rf color.png
+composite -gravity center cover.png background.png "${i%.*}.png"
+rm -rf cover.png background.png
+duration=`ffmpeg -hide_banner -i "$i" 2>&1 | grep "Duration"| cut -d ' ' -f 4 | 
+	sed s/,// | sed 's@\..*@@g' | 
+	awk '{ split($1, A, ":"); split(A[3], B, "."); print 3600*A[1] + 60*A[2] + B[1] }'`
+
+ffmpeg $OPT -loop 1 -i "${i%.*}.png" -i "$i" -c:v libx264 -pix_fmt yuv420p -preset veryfast -t "$duration" -c:a aac -b:a 384K "${i%.*}.mp4"
+rm -rf "${i%.*}.png"
+done
+exit 0

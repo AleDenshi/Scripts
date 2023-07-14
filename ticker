@@ -1,0 +1,6 @@
+#!/bin/sh
+# Simple script that prints the current (TICKER) price.
+# Example usage: ticker xmr
+[ -z $1 ] && printf "Usage: ticker [ticker]\n" && exit 1
+curl -s rate.sx/$1 | grep "ERROR" && exit 1
+printf "$%0.2f\n" `curl -s rate.sx/1$1`
