@@ -1,0 +1,24 @@
+#!/bin/sh
+
+current_rotation=$(xrandr --query --verbose | 
+	grep "LVDS-1" | cut -d ' ' -f 6)
+
+case $current_rotation in
+	"normal") final_rotation="right" matrix="0 1 0 -1 0 1 0 0 1" ;;
+	"right") final_rotation="inverted" matrix="-1 0 1 0 -1 1 0 0 1" ;;
+	"inverted") final_rotation="left" matrix="0 -1 1 1 0 0 0 0 1" ;;
+	"left") final_rotation="normal" matrix="1 0 0 0 1 0 0 0 1";;
+esac
+
+echo "Switching to $final_rotation"
+
+xrandr -o $final_rotation
+
+# Iterate over any Wacom devices
+# TODO: Make this more generic for any touchscreen device
+xinput --list | grep "pointer" | grep "Wacom" | while read -r line; do
+	id=$(echo ${line#*=} | cut -d ' ' -f 1)
+	xinput set-prop $id "Coordinate Transformation Matrix" $matrix
+done
+
+

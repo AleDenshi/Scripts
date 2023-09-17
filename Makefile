@@ -2,4 +2,4 @@
 install:
 	[ -d "~/.local/bin" ] || mkdir -p ~/.local/bin
 	cp * ~/.local/bin/
-	rm ~/.local/bin/Makefile ~/.local/bin/README.md
+	rm ~/.local/bin/Makefile ~/.local/bin/README.md ~/.local/bin/LICENSE
