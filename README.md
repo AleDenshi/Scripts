@@ -34,6 +34,8 @@ A simple script that rotates the screen with `xrandr` to the next rightward dire
 `mplode` is a script that takes any directory of tagged .wav files and spits out YouTube music-like videos, with the aspect ratio of the file's cover art. In addition, the script also outputs a thumbnail which imitates YouTube's style of automated music videos.
 
 ### screenshot
-`screenshot` is a script that uses the `hacksaw` and `shotgun` programs to let the user select a part of the screen to screenshot. The program outputs all screenshots to the home directory by default.
+`screenshot` is a customizeable script you can use to set a screenshot program in my build of dwm. I have it setup to launch `scrot`.
 
+### webcam
+A launch script to open an `ffplay` window of `/dev/video0`.
 

@@ -1,0 +1,2 @@
+#!/bin/sh
+ffplay -hide_banner -loglevel error -stats -window_title Webcam -fflags +nobuffer -fast /dev/video0

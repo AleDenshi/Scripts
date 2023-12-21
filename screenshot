@@ -1,3 +1,2 @@
 #!/bin/sh
-# Screenshot solution utilizing hacksaw and shotgun.
-hacksaw -c fff| xargs shotgun -g
+scrot -s
