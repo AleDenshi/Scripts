@@ -1,0 +1,4 @@
+#!/bin/bash
+FILENAME=$1
+[ -z $1 ] && FILENAME=$(date "+%Y%m%d%H%M").mkv
+ffmpeg -hide_banner -video_size 1920x1080 -framerate 60 -f x11grab -i :0.0 -f pulse -ac 1 -i default -b:a 256k "$FILENAME"

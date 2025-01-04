@@ -33,6 +33,16 @@ A simple script that rotates the screen with `xrandr` to the next rightward dire
 ### mplode
 `mplode` is a script that takes any directory of tagged .wav files and spits out YouTube music-like videos, with the aspect ratio of the file's cover art. In addition, the script also outputs a thumbnail which imitates YouTube's style of automated music videos.
 
+### screencapture
+
+`screenshot` is a simple script that uses FFMPEG to capture the screen and primary audio source (from pipewire/pulseaudio) and sends it to a video, named after the current time. Passing an argument to it will rename the video output to that file. For example:
+
+```sh
+screencapture output.mkv
+```
+
+The command above will record the screen and output the result to `output.mkv`.
+
 ### screenshot
 `screenshot` is a customizeable script you can use to set a screenshot program in my build of dwm. I have it setup to launch `scrot`.
 
